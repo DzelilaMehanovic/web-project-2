@@ -14,5 +14,9 @@ Flight::route("GET /test", function(){
      echo "Hello from new route";
   });
 
+   Flight::route("GET /students", function(){
+     echo "Hello from students route";
+  });
+
 Flight::start();
 ?>
