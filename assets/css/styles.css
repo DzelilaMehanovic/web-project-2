@@ -1,0 +1,18 @@
+h1{
+    color: green
+}
+
+.city{
+    color: green
+}
+
+#city{
+    color: blue
+}
+table, th, tr, td {
+    border: solid black 1px;
+}
+
+/*table tr #table-cell{
+    color: red
+}*/
