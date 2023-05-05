@@ -1,3 +1,6 @@
+table tr {
+  border: "1px solid black";
+}
 table tr #table-cell {
   color: red;
 }/*# sourceMappingURL=styles2.css.map */

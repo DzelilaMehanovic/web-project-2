@@ -2,34 +2,115 @@
 <html>
 <head>
 <title>Web Project 2</title>
-<link rel="stylesheet" href="assets/css/styles.css">
-<link rel="stylesheet" href="assets/css/styles2.css">
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="assets/css/style2.css">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="assets/css/spapp.css" />
+<link
+  href="https://fonts.googleapis.com/css?family=Montserrat:400,700"
+  rel="stylesheet"
+  type="text/css"
+/>
+<link
+  href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic"
+  rel="stylesheet"
+  type="text/css"
+/>
+<link href="assets/css/freelancer.min.css" rel="stylesheet" />
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"
+/>
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css"
+/>
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css"
+  rel="stylesheet"
+/>
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css"
+/>
+<link
+  rel="stylesheet"
+  href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+/>
+
+<link href="https://cdn.jsdelivr.net/npm/toastr@2.1.4/build/toastr.min.css" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/series-label.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/toastr@2.1.4/build/toastr.min.js
+"></script>
+<script src="assets/js/jquery.spapp.js"></script>
+<script src="assets/js/custom.js"></script>
+<script src="assets/js/intro.js"></script>
+<script src="config.js"></script>
+<style>
 <style>
 h1{
     color: blue
+}
+table, tr, td{
+    border: 1px solid black
 }
 
 </style>
 </head>
 <body>
+    <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
+      <div class="container">
+        <a class="navbar-brand" href="#page-top">Start Bootstrap</a>
+        <button class="navbar-toggler navbar-toggler-right text-uppercase font-weight-bold bg-primary text-white rounded" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          Menu
+          <i class="fas fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto" id="tabs"></ul>
+        </div>
+      </div>
+    </nav>
+    <main id="spapp" role="main">
+        <!--<section id="students"></section>
+        <section id="highcharts"></section>
+        <section id="datatable"><h1>Datatable</h1></section>
+        <section id="ex1"><h1>Example 1</h1></section>
+        <section id="ex2"><h1>Example 2</h1></section>
+        <section id="form"><h1>Form</h1></section>-->
+    </main>
 
-    <button type="button" class="btn btn-primary">Primary</button>
-    <button type="button" class="btn btn-secondary">Secondary</button>
-    <button type="button" class="btn btn-success">Success</button>
-    <button type="button" class="btn btn-danger">Danger</button>
+<br/><br/><br/>
+  <select class="js-example-data-array" name="state" style="width:100%" onchange="printValue()">
+  </select><br/>
+
+    <button type="button" onclick="display('Primary')" class="btn btn-primary">Primary</button>
+    <button type="button" onclick="display('Secondary')" class="btn btn-secondary">Secondary</button>
+    <button type="button" onclick="greeting('Success')" class="btn btn-success">Success</button>
+    <button type="button" onclick="greeting('Danger')" class="btn btn-danger">Danger</button>
     <button type="button" class="btn btn-warning">Warning</button>
     <button type="button" class="btn btn-info">Info</button>
     <button type="button" class="btn btn-light">Light</button>
     <button type="button" class="btn btn-dark">Dark</button>
-    
+    <p id="demo">demo p</p>
+    <p id="cars">LIST</p>
     <button type="button" class="btn btn-link">Link</button>
     <div class="row" style="font-size: 45px;color:red">
         <div class="col-lg-6 col-md-12">col 1</div>
         <div class="col-lg-6 col-md-12">col 2</div>
         <!--<div class="col-lg-6 col-md-12">col 2</div>-->
       </div>
-    </div>
     <h1>This is a Heading</h1>
     <p>This is a paragraph.</p>
     <h1>Heading 1</h1>
@@ -48,11 +129,11 @@ h1{
     </p>
     <pre>
         My Bonnie lies over the ocean.
-      
+
         My Bonnie lies over the sea.
-      
+
         My Bonnie lies over the ocean.
-      
+
         Oh, bring back my Bonnie to me.
     </pre>
 <pre>
@@ -74,7 +155,7 @@ For 60 years, WWF has worked to help people and nature thrive. As the world's le
 </blockquote>
 
 <!--<p>The <abbr title="World Health Organization">WHO</abbr> was founded in 1948.</p>-->
-        
+
 
 <a href="https://www.w3schools.com/" target="_blank">Visit W3Schools.com!</a>
 <img src="pic_trulli.jpg" alt="Italian Trulli"/>
@@ -140,5 +221,168 @@ src="https://www.youtube.com/embed/tgbNymZ7vqY">
     <input type="text" id="lname" name="lname" value="Doe">
   </form>
   <br/><br/><br/><br/><br/><br/><br/><br/>
+  <!-- Modal -->
+  <div class="modal fade" id="deleteStudentModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+         <input id="student_id" name="student_id" hidden/>
+        <div class="modal-body" id="delete-student-body">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-danger" onClick="deleteStudent()">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </body>
+<script>
+var nav =
+  '<li class="nav-item mx-0 mx-lg-1">' +
+    '<a class="nav-link py-3 px-0 px-lg-3 rounded " href="#students">Students</a>' +
+   "</li>" +
+  '<li class="nav-item mx-0 mx-lg-1">' +
+  '<a class="nav-link py-3 px-0 px-lg-3 rounded " href="#highcharts">Highcharts</a>' +
+  "  </li>" +
+  '<li class="nav-item mx-0 mx-lg-1">' +
+  '<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#datatable">Datatable</a>' +
+  "</li>" +
+  '<li class="nav-item mx-0 mx-lg-1">' +
+  '<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#ex1">Example 1</a>' +
+  "</li>" +
+  '<li class="nav-item mx-0 mx-lg-1">' +
+  '<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#ex2">Example 2</a>' +
+  "</li>" +
+  '<li class="nav-item mx-0 mx-lg-1">' +
+  '<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#form">Form</a>' +
+  "</li>";
+$("#tabs").html(nav);
+
+var main =
+ '<section id="students">Highcharts</section>' +
+  '<section id="highcharts">Highcharts</section>' +
+  '<section id="datatable"><h1>Datatable</h1></section>' +
+  '<section id="ex1"><h1>Example 1</h1></section>' +
+  '<section id="ex2"><h1>Example 2</h1></section>' +
+  '<section id="form"><h1>Form</h1></section>';
+  $("#spapp").html(main);
+
+
+  /*
+    AJAX request to get all students from DB
+  */
+  getStudents();
+  //console.log(REST_URL+'students');
+ function getStudents(){
+     $.get('rest/students', function(data){
+         var html = '';
+         for(var i = 0; i < data.length; i++){
+            html+= '<tr>'+
+                   '<td>'+data[0].first_name+'</td>'+
+                   '<td>'+data[0].last_name+'</td>'+
+                   '<td><button class="btn btn-info" onClick="editStudent('+data[i].id+')">Edit Student</button></td>'+
+                   '<td><button class="btn btn-danger" onClick="openConfirmationDialog('+data[i].id+')">Delete Student</button></td>'+
+                   '</tr>';
+         }
+         $("#students").html(html);
+         console.log(data);
+     });
+ }
+
+  function openConfirmationDialog(id){
+    $("#deleteStudentModal").modal('show');
+    $("#delete-student-body").html("Do you want to delete student with ID = " + id);
+    $("#student_id").val(id);
+  }
+
+  function deleteStudent(){
+    $.ajax({
+        'url': 'rest/students/'+$("#student_id").val(),
+        'type': 'DELETE',
+        success: function(response){
+            console.log(response);
+            $("#deleteStudentModal").modal('hide');
+            toastr.success(response.message);
+            getStudents();
+            //alert('deleted')
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrow){
+            console.log("Error: " +  errorThrow);
+        }
+    })
+  }
+
+  function editStudent(id){
+
+  }
+
+
+
+
+
+
+
+
+//alert('Hello');
+//hello();
+
+/*
+let list = '<ul>';
+for (var i = 0; i < cars.length; i++){
+    list+= '<li>' + cars[i] + '</li>';
+}
+list+= '</ul>';
+console.log(list);
+document.getElementById('cars').innerHTML = list;
+*/
+
+/*
+let json_text = '{ "employees" : [' +
+'{ "firstName":"John" , "lastName":"Doe" },' +
+'{ "firstName":"Anna" , "lastName":"Smith" },' +
+'{ "firstName":"Peter" , "lastName":"Jones" } ]}';
+
+console.log(json_text);
+const obj = JSON.parse(json_text);
+console.log(obj);
+for (var i=0; i< obj.employees.length; i++){
+  console.log(obj.employees[i].firstName);
+}
+console.log('end');
+
+
+var data = [
+    {
+        id: 0,
+        text: 'enhancement'
+    },
+    {
+        id: 1,
+        text: 'bug'
+    },
+    {
+        id: 2,
+        text: 'duplicate'
+    },
+    {
+        id: 3,
+        text: 'invalid'
+    },
+    {
+        id: 4,
+        text: 'wontfix'
+    }
+];
+
+$(".js-example-data-array").select2({
+  data: data,
+  //multiple: true
+})*/
+</script>
 </html>

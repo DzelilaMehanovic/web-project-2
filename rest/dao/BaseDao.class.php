@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__."/../Config.class.php";
  class BaseDao {
-    private $conn; 
+    private $conn;
 
     private $table_name;
 
@@ -14,7 +14,7 @@ require_once __DIR__."/../Config.class.php";
           $servername = Config::DB_HOST();
           $username = Config::DB_USERNAME();
           $password = Config::DB_PASSWORD();
-          $schema = Config::DB_SCHEMA();;
+          $schema = Config::DB_SCHEMA();
           $this->conn = new PDO("mysql:host=$servername;dbname=$schema", $username, $password);
           // set the PDO error mode to exception
           $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -58,14 +58,14 @@ require_once __DIR__."/../Config.class.php";
         }
         $query = substr($query, 0, -2);
         $query.= ")";
-        
+
         $stmt = $this->conn->prepare($query);
         $stmt->execute($entity);
         $entity['id'] = $this->conn->lastInsertId();
         return $entity;
     }
 
-    
+
     /**
     * Method used to update entity in database
     */

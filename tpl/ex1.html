@@ -1,0 +1,26 @@
+<div style="margin-left: 10%; margin-top: 15%;">
+  <h2>
+    <span class="cow_color">Blue</span> Cow by Gelett Burgess (published in The
+    Lark, 1895)
+  </h2>
+  <p>
+    I never saw a <span class="cow_color">Blue</span> Cow, I never hope to see
+    one; But I can tell you, anyhow, I'd rather see than be one.
+  </p>
+
+  Change the cow's color to:
+  <input id="input_color" value="Purple" />
+  <button id="change_button">
+    Change!
+  </button>
+</div>
+<script>
+  // var button = $("#change_button");
+  $("#change_button").click(function () {
+    //var input = $("#input_color");
+    //var inputValue = $("#input_color").val();
+
+    //    var element = $(".cow_color");
+    $(".cow_color").html($("#input_color").val());
+  });
+</script>
