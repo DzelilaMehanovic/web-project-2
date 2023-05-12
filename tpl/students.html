@@ -1,5 +1,361 @@
-<table id="students">
-  <div class="spinner-border" role="status">
-    <span class="sr-only">Loading...</span>
+<!-- Add Modal -->
+<button
+  type="button"
+  class="btn btn-info btn-lg"
+  data-toggle="modal"
+  data-target="#addStudentModal"
+>
+  Add student
+</button>
+<div class="modal fade" id="addStudentModal" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content" id="addStudentModal">
+      <form id="addStudentForm">
+        <div class="modal-header">
+          <h4 class="modal-title">New student</h4>
+          <button type="button" class="close" data-dismiss="modal">
+            &times;
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="first_name">First Name:</label>
+            <input
+              type="text"
+              id="first_name"
+              name="first_name"
+              required
+              class="form-control"
+            />
+          </div>
+          <div>
+            <label for="lname">Last Name:</label>
+            <input
+              type="text"
+              id="last_name"
+              name="last_name"
+              class="form-control"
+            />
+          </div>
+          <div>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" class="form-control" />
+          </div>
+          <div>
+            <label for="password">Password:</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              class="form-control"
+            />
+          </div>
+          <div>
+            <label for="phone">Phone:</label>
+            <input type="phone" id="phone" name="phone" class="form-control" />
+          </div>
+        </div>
+        <div class="error"><span></span></div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-default"
+            id="close_button"
+            data-dismiss="modal"
+          >
+            Close
+          </button>
+          <button type="submit" class="btn btn-success">Submit</button>
+        </div>
+        <div id="messageBox1"><ul></ul></div>
+      </form>
+    </div>
   </div>
-</table>
+</div>
+<!-- Delete Modal -->
+<div
+  class="modal fade"
+  id="deleteStudentModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <input id="student_id" name="student_id" hidden />
+      <div class="modal-body" id="delete-student-body"></div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+          Close
+        </button>
+        <button type="button" class="btn btn-danger" onClick="deleteStudent()">
+          Delete
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Edit Modal -->
+<!-- Modal -->
+<div class="modal fade" id="editStudentModal" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content" id="editStudentModal">
+      <div class="spinner-border" id="editModalSpinner" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+      <form id="editStudentForm">
+        <div class="modal-header">
+          <h4 class="modal-title">Edit student</h4>
+          <button type="button" class="close" data-dismiss="modal">
+            &times;
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <input id="edit_student_id" name="edit_student_id" hidden />
+            <label for="fname">First Name:</label>
+            <input
+              type="text"
+              id="edit_first_name"
+              name="first_name"
+              required
+              class="form-control"
+            />
+          </div>
+          <div>
+            <label for="lname">Last Name:</label>
+            <input
+              type="text"
+              id="edit_last_name"
+              name="last_name"
+              class="form-control"
+            />
+          </div>
+          <div>
+            <label for="user_email">Email:</label>
+            <input
+              type="email"
+              id="edit_email"
+              name="email"
+              class="form-control"
+            />
+          </div>
+          <div>
+            <label for="psword">Password:</label>
+            <input
+              type="password"
+              id="edit_password"
+              name="password"
+              class="form-control"
+            />
+          </div>
+        </div>
+        <div class="error"><span></span></div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-default"
+            id="close_button"
+            data-dismiss="modal"
+          >
+            Close
+          </button>
+          <button type="submit" onclick="editStudent()" class="btn btn-success">
+            Submit
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!--Students Table -->
+<table id="students-table"></table>
+<script type="text/javascript">
+  /*
+    AJAX request to get all students from DB
+  */
+  getStudents();
+  //console.log(REST_URL+'students');
+  function getStudents() {
+    $.get("rest/students", function (data) {
+      var html = "";
+      for (var i = 0; i < data.length; i++) {
+        html +=
+          "<tr>" +
+          "<td>" +
+          data[i].first_name +
+          "</td>" +
+          "<td>" +
+          data[i].last_name +
+          "</td>" +
+          "<td>" +
+          (data[i].email ? data[i].email : "No data") +
+          "</td>" +
+          "<td>" +
+          (data[i].password ? data[i].password : "No data") +
+          "</td>" +
+          '<td><button class="btn btn-info" onClick="showEditDialog(' +
+          data[i].id +
+          ')">Edit Student</button></td>' +
+          '<td><button class="btn btn-danger" onClick="openConfirmationDialog(' +
+          data[i].id +
+          ')">Delete Student</button></td>' +
+          "</tr>";
+      }
+      $("#students-table").html(html);
+      console.log(data);
+    });
+  }
+
+  function openConfirmationDialog(id) {
+    $("#deleteStudentModal").modal("show");
+    $("#delete-student-body").html(
+      "Do you want to delete student with ID = " + id
+    );
+    $("#student_id").val(id);
+  }
+
+  function deleteStudent() {
+    $.ajax({
+      url: "rest/students/" + $("#student_id").val(),
+      type: "DELETE",
+      success: function (response) {
+        console.log(response);
+        $("#deleteStudentModal").modal("hide");
+        toastr.success(response.message);
+        getStudents();
+        //alert('deleted')
+      },
+      error: function (XMLHttpRequest, textStatus, errorThrow) {
+        console.log("Error: " + errorThrow);
+      },
+    });
+  }
+
+  function showEditDialog(id) {
+    $("#editStudentModal").modal("show");
+    $("#editModalSpinner").show();
+    $("#editStudentForm").hide();
+    $.get("rest/students/" + id, function (data) {
+      console.log(data);
+      $("#edit_first_name").val(data.first_name);
+      $("#edit_last_name").val(data.last_name);
+      $("#edit_email").val(data.email);
+      $("#edit_password").val(data.password);
+      $("#edit_student_id").val(data.id);
+      $("#editModalSpinner").hide();
+      $("#editStudentForm").show();
+    });
+  }
+
+  function editStudent() {
+    $("#editStudentForm").validate({
+      submitHandler: function (form, validator) {
+        data = {
+          first_name: $("#edit_first_name").val(),
+          last_name: $("#edit_last_name").val(),
+          email: $("#edit_email").val(),
+          password: $("#edit_password").val(),
+        };
+        $.ajax({
+          url: "rest/student/" + $("#edit_student_id").val(),
+          type: "PUT",
+          data: JSON.stringify(data),
+          contentType: "application/json",
+          dataType: "json",
+          success: function (result) {
+            toastr.success("Student has been updated successfully");
+            $("#editStudentModal").modal("toggle");
+            getStudents();
+          },
+          error: function (XMLHttpRequest, textStatus, errorThrown) {
+            toastr.error("Error! Student has not been updated.");
+          },
+        });
+      },
+    });
+  }
+
+  jQuery.validator.addMethod(
+    "email",
+    function (value, element) {
+      return (
+        this.optional(element) ||
+        /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i.test(value)
+      );
+    },
+    "Please enter valid email address!"
+  );
+
+  $("#addStudentForm").validate({
+    focusCleanup: true,
+    errorElement: "em",
+    rules: {
+      first_name: "required",
+      last_name: "required",
+      password: {
+        required: true,
+        minlength: 2,
+        maxlength: 10,
+      },
+    },
+    messages: {
+      first_name: "First name field is required",
+      last_name: "Last name field is required",
+      email: "Enter a valid email",
+      password: {
+        minlength: "Password must be at least 2 characters long",
+      },
+    },
+    highlight: function (element, errorClass) {
+      $(element).fadeOut(function () {
+        $(element).fadeIn();
+      });
+    },
+    errorContainer: "#messageBox1",
+    errorLabelContainer: "#messageBox1 ul",
+    wrapper: "li",
+    submitHandler: function (form, validator) {
+      $.post("rest/student", $("#addStudentForm").serialize())
+        .done(function () {
+          toastr.success("Student added");
+          $("#addStudentModal").modal("toggle");
+          getStudents();
+          form.reset();
+        })
+        .fail(function () {
+          toastr.error("Student not added");
+        });
+    },
+    invalidHandler: function (event, validator) {
+      var errors = validator.numberOfInvalids();
+      toastr.error("Error");
+      if (errors) {
+        var message =
+          errors == 1
+            ? "You missed 1 field."
+            : "You missed " + errors + " fields.";
+        $("div.error span").html(message);
+        $("div.error").show();
+      } else {
+        $("div.error").hide();
+      }
+    },
+  });
+</script>

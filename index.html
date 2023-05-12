@@ -45,6 +45,7 @@
 
 <link href="https://cdn.jsdelivr.net/npm/toastr@2.1.4/build/toastr.min.css" rel="stylesheet">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script src="https://code.highcharts.com/highcharts.js"></script>
 <script src="https://code.highcharts.com/modules/series-label.js"></script>
@@ -221,26 +222,7 @@ src="https://www.youtube.com/embed/tgbNymZ7vqY">
     <input type="text" id="lname" name="lname" value="Doe">
   </form>
   <br/><br/><br/><br/><br/><br/><br/><br/>
-  <!-- Modal -->
-  <div class="modal fade" id="deleteStudentModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-         <input id="student_id" name="student_id" hidden/>
-        <div class="modal-body" id="delete-student-body">
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-danger" onClick="deleteStudent()">Delete</button>
-        </div>
-      </div>
-    </div>
-  </div>
+
 </body>
 <script>
 var nav =
@@ -272,62 +254,6 @@ var main =
   '<section id="ex2"><h1>Example 2</h1></section>' +
   '<section id="form"><h1>Form</h1></section>';
   $("#spapp").html(main);
-
-
-  /*
-    AJAX request to get all students from DB
-  */
-  getStudents();
-  //console.log(REST_URL+'students');
- function getStudents(){
-     $.get('rest/students', function(data){
-         var html = '';
-         for(var i = 0; i < data.length; i++){
-            html+= '<tr>'+
-                   '<td>'+data[0].first_name+'</td>'+
-                   '<td>'+data[0].last_name+'</td>'+
-                   '<td><button class="btn btn-info" onClick="editStudent('+data[i].id+')">Edit Student</button></td>'+
-                   '<td><button class="btn btn-danger" onClick="openConfirmationDialog('+data[i].id+')">Delete Student</button></td>'+
-                   '</tr>';
-         }
-         $("#students").html(html);
-         console.log(data);
-     });
- }
-
-  function openConfirmationDialog(id){
-    $("#deleteStudentModal").modal('show');
-    $("#delete-student-body").html("Do you want to delete student with ID = " + id);
-    $("#student_id").val(id);
-  }
-
-  function deleteStudent(){
-    $.ajax({
-        'url': 'rest/students/'+$("#student_id").val(),
-        'type': 'DELETE',
-        success: function(response){
-            console.log(response);
-            $("#deleteStudentModal").modal('hide');
-            toastr.success(response.message);
-            getStudents();
-            //alert('deleted')
-        },
-        error: function(XMLHttpRequest, textStatus, errorThrow){
-            console.log("Error: " +  errorThrow);
-        }
-    })
-  }
-
-  function editStudent(id){
-
-  }
-
-
-
-
-
-
-
 
 //alert('Hello');
 //hello();

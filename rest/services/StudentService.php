@@ -8,13 +8,16 @@ class StudentService extends BaseService{
     }
 
     public function update($student, $id){
-        if($student['id_column']){
+        $student['password'] = md5($student['password']);
+        if(isset($student['id_column'])  && !is_null($student['id_column'])){
             return parent::update($student, $id, $student['id_column']);
         }
         return parent::update($student, $id);
     }
 
     public function add($entity){
+        unset($entity['phone']);
+        $entity['password'] = md5($entity['password']);
         return parent::add($entity);
         /*
         example
