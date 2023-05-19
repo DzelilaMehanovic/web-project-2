@@ -2,7 +2,7 @@
 
 class BaseService {
     private $dao;
-   
+
     public function __construct($dao){
         $this->dao = $dao;
     }
@@ -19,10 +19,10 @@ class BaseService {
         return $this->dao->add($entity);
     }
 
-    public function update($entity, $id){
-        return $this->dao->update($entity, $id);
+    public function update($entity, $id, $id_column="id"){
+        return $this->dao->update($entity, $id, $id_column);
     }
-    
+
     public function delete($id){
         return $this->dao->delete($id);
     }

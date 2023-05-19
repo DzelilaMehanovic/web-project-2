@@ -98,11 +98,20 @@
       <input id="student_id" name="student_id" hidden />
       <div class="modal-body" id="delete-student-body"></div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+        <button
+          type="button"
+          class="btn btn-default"
+          id="close_button"
+          data-dismiss="modal"
+        >
           Close
         </button>
-        <button type="button" class="btn btn-danger" onClick="deleteStudent()">
-          Delete
+        <button
+          type="submit"
+          onclick="StudentService.deleteStudent()"
+          class="btn btn-success"
+        >
+          Submit
         </button>
       </div>
     </div>
@@ -115,9 +124,6 @@
   <div class="modal-dialog">
     <!-- Modal content-->
     <div class="modal-content" id="editStudentModal">
-      <div class="spinner-border" id="editModalSpinner" role="status">
-        <span class="sr-only">Loading...</span>
-      </div>
       <form id="editStudentForm">
         <div class="modal-header">
           <h4 class="modal-title">Edit student</h4>
@@ -126,9 +132,9 @@
           </button>
         </div>
         <div class="modal-body">
+          <input type="text" id="edit_student_id" name="id" required hidden />
           <div class="form-group">
-            <input id="edit_student_id" name="edit_student_id" hidden />
-            <label for="fname">First Name:</label>
+            <label for="first_name">First Name:</label>
             <input
               type="text"
               id="edit_first_name"
@@ -147,7 +153,7 @@
             />
           </div>
           <div>
-            <label for="user_email">Email:</label>
+            <label for="email">Email:</label>
             <input
               type="email"
               id="edit_email"
@@ -156,7 +162,7 @@
             />
           </div>
           <div>
-            <label for="psword">Password:</label>
+            <label for="password">Password:</label>
             <input
               type="password"
               id="edit_password"
@@ -175,9 +181,7 @@
           >
             Close
           </button>
-          <button type="submit" onclick="editStudent()" class="btn btn-success">
-            Submit
-          </button>
+          <button type="submit" class="btn btn-success">Submit</button>
         </div>
       </form>
     </div>
@@ -187,12 +191,12 @@
 <!--Students Table -->
 <table id="students-table"></table>
 <script type="text/javascript">
+  StudentService.init();
   /*
     AJAX request to get all students from DB
   */
-  getStudents();
   //console.log(REST_URL+'students');
-  function getStudents() {
+  /*function getStudents() {
     $.get("rest/students", function (data) {
       var html = "";
       for (var i = 0; i < data.length; i++) {
@@ -213,7 +217,7 @@
           '<td><button class="btn btn-info" onClick="showEditDialog(' +
           data[i].id +
           ')">Edit Student</button></td>' +
-          '<td><button class="btn btn-danger" onClick="openConfirmationDialog(' +
+          '<td><button class="btn btn-danger" onClick="StudentService.openConfirmationDialog(' +
           data[i].id +
           ')">Delete Student</button></td>' +
           "</tr>";
@@ -246,7 +250,7 @@
         console.log("Error: " + errorThrow);
       },
     });
-  }
+}
 
   function showEditDialog(id) {
     $("#editStudentModal").modal("show");
@@ -290,9 +294,9 @@
         });
       },
     });
-  }
+}*/
 
-  jQuery.validator.addMethod(
+  /* jQuery.validator.addMethod(
     "email",
     function (value, element) {
       return (
@@ -357,5 +361,5 @@
         $("div.error").hide();
       }
     },
-  });
+});*/
 </script>
