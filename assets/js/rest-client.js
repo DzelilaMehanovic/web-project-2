@@ -3,12 +3,12 @@ var RestClient = {
     $.ajax({
       url: "rest/" + url,
       type: "GET",
-      /*beforeSend: function (xhr) {
+      beforeSend: function (xhr) {
         xhr.setRequestHeader(
-          "authorization",
-          "Bearer " + localStorage.getItem("user_token")
+          "Authorization",
+          localStorage.getItem("user_token")
         );
-    },*/
+      },
       success: function (data) {
         if (success) success(data);
       },

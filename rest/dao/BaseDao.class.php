@@ -92,10 +92,26 @@ require_once __DIR__."/../Config.class.php";
         $stmt->execute();
     }
 
+
+    /**
+    * Method used to delete entity from database
+    */
+    protected function delete_query($user_id, $id){
+        $stmt = $this->conn->prepare("DELETE FROM " . $this->table_name . " WHERE id = :id AND user_id = :user_id");
+        $stmt->bindParam(':id', $id); #prevent SQL injection
+        $stmt->bindParam(':user_id', $user_id); #prevent SQL injection
+        $stmt->execute();
+    }
+
     protected function query($query, $params){
       $stmt = $this->conn->prepare($query);
       $stmt->execute($params);
       return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    protected function query_unique($query, $params){
+      $results = $this->query($query, $params);
+      return reset($results);
     }
  }
 
