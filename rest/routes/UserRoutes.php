@@ -28,7 +28,7 @@ use Firebase\JWT\Key;
 */
 Flight::route('POST /login', function(){
     $login = Flight::request()->data->getData();
-    $user = Flight::userDao()->get_user_by_email($login['email']);
+    $user = Flight::user_service()->get_user_by_email($login['email']);
     if(count($user) > 0){
         $user = $user[0];
     }
